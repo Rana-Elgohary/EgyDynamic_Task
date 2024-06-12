@@ -1,0 +1,53 @@
+<div>
+    <div style="overflow-x: auto;">
+      <table class="text-sm" id="TableId">
+        <thead class="bg-sky-600 text-white">
+          <tr>
+            <ng-container *ngFor="let columnName of columnNames; let i = index">
+              <th *ngIf="columnVisibility[columnName]" class="border-gray-100 border-2 relative">
+                <div *ngIf="showSearch" class="bg-gray-500 w-[100%]">
+                  <input type="text" placeholder="بحث..." class="p-2 w-full bg-gray-300 text-sky-700" [(ngModel)]="columnSearchText[i]" (keyup.enter)="Search(i)">
+                </div>
+                <p class="p-2">{{ columnName }}</p>
+              </th>
+            </ng-container>
+            <th class="border-gray-100 border-2 p-2"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of customers" class="text-blue-800">
+            <ng-container *ngFor="let columnName of columnNames; let i = index">
+              <td *ngIf="columnVisibility[columnName]" class="border-gray-100 border-2 p-2">{{ getCustomerProperty(customer, columnName) }}</td>
+            </ng-container>
+            <td class="border border-gray-100 p-3 items-center content-center flex justify-around">
+              <button (click)="editCustomer(customer)" class="text-blue-400 hover:text-blue-600"><i class="fas fa-edit"></i></button>
+              <button (click)="deleteCustomer(customer['كود_العميل'])" class="text-red-400 hover:text-red-600 pr-2"><i class="fas fa-trash"></i></button>
+            </td>       
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="flex mt-5 justify-between p-5">
+      <div class="w-36 flex items-center justify-between">
+        <button (click)="onPageChange(Math.ceil(totalItems / pageSize))" [disabled]="pageNumber === Math.ceil(totalItems / pageSize)" class="p-2 text-sm bg-orange-400 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed">
+          <<
+        </button>
+        <button (click)="onPageChange(pageNumber + 1)" [disabled]="pageNumber === Math.ceil(totalItems / pageSize)" class="p-2 text-sm bg-orange-400 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed">
+          <
+        </button>
+        <span>{{ pageNumber }} </span>
+        <button (click)="onPageChange(pageNumber - 1)" [disabled]="pageNumber === 1" class="p-2 text-sm bg-orange-400 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed">
+          >
+        </button>
+        <button (click)="onPageChange(1)" [disabled]="pageNumber === 1" class="p-2 text-sm bg-orange-400 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed">
+          >>
+        </button>
+      </div>
+
+      <div class=" bg-orange-400 rounded text-white p-2 text-sm hover:bg-orange-600">
+       اجمالي العدد في الصفحه {{pageSize}}
+      </div>
+    </div>
+</div>
+  

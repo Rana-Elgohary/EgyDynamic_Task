@@ -1,0 +1,47 @@
+<div class="flex justify-center mb-10">
+    <button (click)="Logout()" class=" bg-orange-400 rounded text-white p-2 text-sm hover:bg-orange-600">تسجيل خروج</button>
+</div>
+
+<div class="shadow-2xl rounded p-5 bg-white">
+    <div class="flex justify-between items-center">
+        <div class="flex w-1/4 bg-gray-200 rounded-md h-10">
+            <button (click)="ExportToExcelFile()" class="text-sky-500 mx-2 ">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                </svg>
+            </button>
+            <button (click)="PrintTable()" class="text-sky-500 mx-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 8h-1V3H6v5H5c-1.11 0-1.99.89-1.99 2L3 18h4v3h10v-3h4v-8c0-1.11-.89-2-2-2zm-6 11h-4v-4h4v4zm4-11H7V5h10v3z"/>
+                </svg>
+            </button>
+            <button (click)="Refresh()" class="text-sky-500 mx-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+                </svg>
+            </button>
+            <button (click)="search()" class="text-sky-500 mx-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.57 14 6 12.43 6 10.5S7.57 7 9.5 7s3.5 1.57 3.5 3.5S11.43 14 9.5 14z"/>
+                </svg>
+            </button>
+            <div class="relative flex">
+                <button (click)="Filter()" class="text-sky-500 mx-2">
+                    <img src="../../../assets/cog-wheel-silhouette_icon-icons.com_73617.svg" class="w-4">
+                </button>
+                <div *ngIf="showColumnSelector" class="absolute z-40 top-10 w-60 flex flex-col text-white p-2 rounded-md bg-[#1a608bc8]">
+                    <label *ngFor="let column of columnNames">
+                      <input type="checkbox" [(ngModel)]="columnVisibility[column]"> {{ column }}
+                    </label>
+                </div>
+            </div>
+        </div>
+    
+        <button (click)="AddCustomer()" class=" bg-sky-500 rounded text-white p-2 hover:bg-sky-600 flex text-lg items-center w-24 justify-center">جديد 
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M12 4v16m8-8H4"/>
+            </svg>
+        </button>
+    </div> 
+    <app-customer-list class="p-5 z-0" (tableDataEvent)="handleTableData($event)"></app-customer-list>
+</div>
