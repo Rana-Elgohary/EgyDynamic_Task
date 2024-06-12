@@ -1,0 +1,6 @@
+@EgyDynamic_Task_HostAddress = http://localhost:5072
+
+GET {{EgyDynamic_Task_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
